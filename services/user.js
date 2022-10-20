@@ -56,7 +56,6 @@ exports.createUser = ({ email, firstName, lastName }) => {
 };
 
 exports.updateUser = (user) => {
-  console.log("hey");
   if (!user.id && !user.email && !user.firstName && !user.lastName) {
     throw `Missing information.`;
   }
@@ -69,10 +68,7 @@ exports.updateUser = (user) => {
     throw `User does not exist.`;
   }
 
-  console.log("no");
-
   Object.keys(user).forEach((key) => (exists[key] = user[key]));
-  console.log(Users);
 
   return true;
 };
