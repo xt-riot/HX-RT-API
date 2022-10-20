@@ -1,7 +1,50 @@
-exports.getUser = async (req, res) => {};
+const user = require("../services/user");
 
-exports.createUser = async (req, res) => {};
+exports.getUser = async (req, res) => {
+  try {
+    const response = await user.findUserByID(req.query.id);
 
-exports.updateUser = async (req, res) => {};
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(response));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "text/plain" });
+    res.end(err);
+  }
+};
 
-exports.deleteUser = async (req, res) => {};
+exports.createUser = async (req, res) => {
+  try {
+    await user.createUser(req.body);
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "User created successfully." }));
+  } catch (err) {
+    res.writeHead(400, { "Content-Type": "text/plain" });
+    res.end(err);
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    await user.updateUser(req.body);
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "User updated successfully." }));
+  } catch (err) {
+    res.writeHead(400, { "Content-Type": "text/plain" });
+    res.end(err);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await user.deleteUser(req.body);
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "User deleted successfully." }));
+  } catch (err) {
+    console.log(err);
+    res.writeHead(400, { "Content-Type": "text/plain" });
+    res.end(err);
+  }
+};

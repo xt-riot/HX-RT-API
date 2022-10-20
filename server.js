@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const router = require("./routes/user.routes");
 
 const server = express();
+server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 // middleware for http requests benchmarking
